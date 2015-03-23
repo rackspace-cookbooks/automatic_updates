@@ -9,7 +9,7 @@ driver:
   name: vagrant # provide a default test-kitchen driver, vagrant
 
 driver_config:
-  require_chef_omnibus: latest
+  require_chef_omnibus: true
 
 provisioner:
   name: chef_zero
@@ -50,9 +50,10 @@ platforms:
   - name: centos-6.5
     run_list:
     - recipe[yum]
+  - name: centos-7.0
+    run_list:
+    - recipe[yum]
 
 suites:
   - name: default
     run_list: recipe[automatic_updates]
-    attributes:
-      foo: 'bar'

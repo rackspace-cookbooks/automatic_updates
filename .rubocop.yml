@@ -13,6 +13,9 @@ LineLength:
 MethodLength:
   Max: 40
 
+Metrics/AbcSize:
+  Max: 50
+
 # Favor explicit over implicit code: don't complain of "redundant returns"
 RedundantReturn:
   Enabled: false
@@ -36,6 +39,13 @@ WordArray:
 
 # Don't complain about unused block args
 UnusedBlockArgument:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+# Offense count: 3
+Style/Documentation:
   Enabled: false
 
 AllCops:

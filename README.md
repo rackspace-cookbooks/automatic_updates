@@ -1,9 +1,8 @@
 # automatic_updates
 
-Template for new stacks that includes best practices and default files for
-Rubocop, Foodcritic (including custom [Rackspace rules](https://github.com/AutomationSupport/foodcritic-rackspace-rules)),
-Rake, Thor, etc. Eventually, and ideally, this would be used by [stackbuilder](https://github.com/rackerlabs/stackbuilder)
-to initialize new stacks.
+Configures automatic updates using yum-cron or unattended-upgrades. Provides a
+resource and providers for platforms listed below. Supports two actions,
+`:enable` and `:disable`.
 
 ## [Changelog](CHANGELOG.md)
 
@@ -11,38 +10,35 @@ See CHANGELOG.md for additional information about changes to this stack over tim
 
 ## Supported Platforms
 
+Ubuntu 14.04
+
 Ubuntu 12.04
 
 CentOS 6.5
 
-## Attributes
-
-Please describe any attributes exposed by this stack, and what the default values are. There shouldn't be any attributes without a default value (e.g. no required attributes, sensible defaults).
-
-<table>
-  <tr>
-    <th>Key</th>
-    <th>Type</th>
-    <th>Description</th>
-    <th>Default</th>
-  </tr>
-  <tr>
-    <td><tt>['automatic_updates']['bacon']</tt></td>
-    <td>Boolean</td>
-    <td>whether to include bacon</td>
-    <td><tt>true</tt></td>
-  </tr>
-</table>
+CentOS 7.0
 
 ## Usage
 
 ### automatic_updates::default
 
-This is where you should define what the default recipe does, if anything.
+Configure automatic updates with the default action of `:enable`.
 
-### automatic_updates::bacon
+### automatic_updates LWRP
 
-Please define what the other recipes do as well.
+```
+automatic_updates 'default' do
+  action :enable
+end
+```
+
+or, to disable automatic updates:
+
+```
+automatic_updates 'default' do
+  action :disable
+end
+```
 
 ## Contributing
 
@@ -54,7 +50,7 @@ Author:: Rackspace (devops-chef@rackspace.com)
 
 ## License
 ```
-# Copyright 2014, Rackspace Hosting
+# Copyright 2015, Rackspace Hosting
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
