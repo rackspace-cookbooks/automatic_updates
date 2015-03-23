@@ -13,11 +13,13 @@ Dir['./test/unit/spec/support/**/*.rb'].sort.each { |f| require f }
 }
 
 def node_resources(node)
-  node.automatic['example']['attribute'] = 'lions, tigers and bears!'
+  node.automatic['rackspace'] = true
+  node.automatic['cloud'] = true
 end
 
 def stub_resources
   stub_command('which sudo').and_return('/usr/bin/sudo')
+  stub_command('debconf-get-selections | grep unattended-upgrades | grep boolean | grep false').and_return(0)
 end
 
 at_exit { ChefSpec::Coverage.report! }

@@ -3,8 +3,8 @@
 # Cookbook Name:: automatic_updates
 # Recipe:: default
 #
-# Copyright 2014, Rackspace
+# Copyright 2015, Rackspace
 #
-node.default['example']['attribute'] = 'lions, tigers'
-node.override['example']['attribute'] = 'lions, tigers and bears'
-log node['example']['attribute']
+automatic_updates 'default' do
+  action :enable
+end
