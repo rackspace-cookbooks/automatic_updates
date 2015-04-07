@@ -12,5 +12,5 @@ end
 end
 
 describe command('debconf-get-selections'), if: ubuntu?  do
-  its(:stdout) { should match(/unattended-upgrades\sunattended-upgrades\/enable_auto_updates\sboolean\strue/) }
+  its(:stdout) { should match %r{unattended-upgrades\sunattended-upgrades/enable_auto_updates\sboolean\strue} }
 end

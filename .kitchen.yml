@@ -47,10 +47,14 @@ platforms:
   - name: ubuntu-12.04
     run_list:
     - recipe[apt]
-  - name: centos-6.5
+  - name: centos-6.6
     run_list:
     - recipe[yum]
+<% if ENV['CI'] %>
+  - name: centos-7
+<% else %>
   - name: centos-7.0
+<% end %>
     run_list:
     - recipe[yum]
 
