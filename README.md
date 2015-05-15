@@ -1,3 +1,5 @@
+[![Circle CI](https://circleci.com/gh/rackspace-cookbooks/automatic_updates.svg?style=svg)](https://circleci.com/gh/rackspace-cookbooks/automatic_updates)
+
 # automatic_updates
 
 Configures automatic updates using yum-cron or unattended-upgrades. Provides a
@@ -10,21 +12,28 @@ See CHANGELOG.md for additional information about changes to this stack over tim
 
 ## Supported Platforms
 
-Ubuntu 14.04
+* Ubuntu 14.04
+* Ubuntu 12.04
+* CentOS 6.5
+* CentOS 7.0
 
-Ubuntu 12.04
+## Usage	
 
-CentOS 6.5
+### Recipe
 
-CentOS 7.0
+#### automatic_updates::default
 
-## Usage
+Enable automatic updates
 
-### automatic_updates::default
+### Resources
 
-Configure automatic updates with the default action of `:enable`.
+#### automatic_updates
 
-### automatic_updates LWRP
+Enable or disable automatique update
+
+#### Actions
+
+* `:enable` enable automatique updates
 
 ```
 automatic_updates 'default' do
@@ -32,7 +41,8 @@ automatic_updates 'default' do
 end
 ```
 
-or, to disable automatic updates:
+* `:disable` disable automatique updates
+ 
 
 ```
 automatic_updates 'default' do
@@ -42,7 +52,12 @@ end
 
 ## Contributing
 
-See [CONTRIBUTING](https://github.com/AutomationSupport/automatic_updates/blob/master/CONTRIBUTING.md).
+1. Fork the repository on Github
+2. Create a named feature branch (i.e. `add-new-recipe`)
+3. Write your change
+4. Write tests for your change (if applicable)
+5. Run the tests, ensuring they all pass
+6. Submit a Pull Request
 
 ## Authors
 
