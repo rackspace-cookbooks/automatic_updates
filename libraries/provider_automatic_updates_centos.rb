@@ -1,6 +1,9 @@
 #
 # Copyright 2015, Rackspace
 #
+
+require 'poise'
+
 class Chef
   class Provider::AutomaticUpdatesCentOS < Provider
     include Poise
