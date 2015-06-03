@@ -2,20 +2,11 @@
 # Copyright 2015, Rackspace
 #
 class Chef
-  class Provider::AutomaticUpdatesCentOS < Provider
-    include Poise
-    include Chef::Mixin::ShellOut
-
-    def action_enable
-      converge_by('install yum-cron and configure service') do
-        notifying_block do
-          include_recipe 'chef-sugar'
-          require 'chef/sugar'
-          unless rhel? && cloud?
-            Chef::Log.warn('Not configuring automatic updates, as they are not supported on this platform or this is not a cloud server')
-            return
-          end
-
+  class Provider
+    # Provider definition for automatic_updates
+    class AutomaticUpdatesCentOS < Chef::Provider::LWRPBase
+      def action_enable
+        converge_by('install yum-cron and configure service') do
           package 'yum-cron' do
             action :install
           end
@@ -31,25 +22,20 @@ class Chef
                 automatic_updates_enabled: 'yes',
                 download_only: 'no'
               )
-              only_if { rhel? && ::File.exist?(settings_file) }
+              only_if { ::File.exist?(settings_file) }
               notifies :restart, 'service[yum-cron]', :delayed
             end
           end
 
           service 'yum-cron' do
-            service_name 'yum-cron'
-            if node['platform_family'] == 'rhel'
-              supports restart: true, reload: true, status: true
-            end
+            supports restart: true, reload: true, status: true
             action [:enable, :start]
           end
         end
       end
-    end
 
-    def action_disable
-      converge_by('disable yum-cron service') do
-        notifying_block do
+      def action_disable
+        converge_by('disable yum-cron service') do
           # template any relevant files (gets around checking for versions)
           %w(/etc/sysconfig/yum-cron /etc/yum/yum-cron.conf).each do |settings_file|
             template settings_file do
@@ -61,17 +47,13 @@ class Chef
                 automatic_updates_enabled: 'no',
                 download_only: 'yes'
               )
-              only_if { rhel? && ::File.exist?(settings_file) }
+              only_if { ::File.exist?(settings_file) }
               notifies :stop, 'service[yum-cron]', :delayed
-              # action :nothing
             end
           end
 
           service 'yum-cron' do
-            service_name 'yum-cron'
-            if node['platform_family'] == 'rhel'
-              supports restart: true, reload: true, status: true
-            end
+            supports restart: true, reload: true, status: true
             action [:disable, :stop]
           end
         end

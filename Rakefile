@@ -12,8 +12,7 @@ namespace :style do
   desc 'Run Chef style checks'
   FoodCritic::Rake::LintTask.new(:chef) do |t|
     t.options = { search_gems: true,
-                  fail_tags: %w(correctness rackspace),
-                  chef_version: '11.6.0'
+                  fail_tags: ['correctness','rackspace']
                 }
   end
 end
@@ -23,7 +22,7 @@ task style: ['style:chef', 'style:ruby']
 
 # Rspec and ChefSpec
 desc 'Run ChefSpec unit tests'
-RSpec::Core::RakeTask.new(:spec) do |t, _args|
+RSpec::Core::RakeTask.new(:spec) do |t, args|
   t.rspec_opts = 'test/unit'
 end
 
@@ -45,7 +44,7 @@ namespace :integration do
       config = Kitchen::Config.new(loader: @loader)
       concurrency = config.instances.size
       queue = Queue.new
-      config.instances.each { |i| queue << i }
+      config.instances.each {|i| queue << i }
       concurrency.times { queue << nil }
       threads = []
       concurrency.times do
@@ -55,7 +54,7 @@ namespace :integration do
           end
         end
       end
-      threads.map(&:join)
+      threads.map { |i| i.join }
     end
   end
 end
