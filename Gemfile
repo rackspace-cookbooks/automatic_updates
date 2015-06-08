@@ -28,7 +28,7 @@ end
 group :development do
   gem 'growl'
   gem 'rb-fsevent'
-  gem 'guard'
+  gem 'guard', '= 2.8.2'
   gem 'guard-kitchen'
   gem 'guard-foodcritic'
   gem 'guard-rubocop'

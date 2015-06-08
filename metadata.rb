@@ -9,5 +9,4 @@ version '0.1.1'
 
 depends 'apt'
 depends 'chef-sugar'
-depends 'poise'
 depends 'yum'
