@@ -1,9 +1,6 @@
 #
 # Copyright 2015, Rackspace
 #
-
-require 'poise'
-
 class Chef
   class Provider
     # Provider definition for automatic_updates
