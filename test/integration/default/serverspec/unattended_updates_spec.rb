@@ -11,6 +11,6 @@ end
   end
 end
 
-describe command('debconf-get-selections'), if: ubuntu?  do
+describe command('debconf-get-selections'), if: ubuntu? do
   its(:stdout) { should match %r{unattended-upgrades\sunattended-upgrades/enable_auto_updates\sboolean\strue} }
 end

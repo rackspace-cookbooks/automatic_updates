@@ -4,6 +4,8 @@
 #########
 # automatic_updates
 #########
-Chef::Platform.set platform: :centos, resource: :automatic_updates, provider: Chef::Provider::AutomaticUpdatesCentOS
-Chef::Platform.set platform: :redhat, resource: :automatic_updates, provider: Chef::Provider::AutomaticUpdatesCentOS
+[:centos, :redhat, :amazon].each do |rh_platform|
+  Chef::Platform.set platform: rh_platform, resource: :automatic_updates, provider: Chef::Provider::AutomaticUpdatesCentOS
+end
+
 Chef::Platform.set platform: :ubuntu, resource: :automatic_updates, provider: Chef::Provider::AutomaticUpdatesUbuntu
