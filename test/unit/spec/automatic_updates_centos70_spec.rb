@@ -10,7 +10,7 @@ describe 'automatic_updates_test::* on Centos 7.0' do
     platform: 'centos',
     version: '7.0',
     step_into: ['automatic_updates']
-  }
+  }.freeze
 
   context 'Enable automationc_update' do
     let(:chef_run) do

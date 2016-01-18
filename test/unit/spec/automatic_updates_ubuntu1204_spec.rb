@@ -10,7 +10,7 @@ describe 'automatic_updates_test::* on Ubuntu 12.04' do
     platform: 'ubuntu',
     version: '12.04',
     step_into: ['automatic_updates']
-  }
+  }.freeze
 
   context 'Enable automatic_update' do
     let(:chef_run) do
