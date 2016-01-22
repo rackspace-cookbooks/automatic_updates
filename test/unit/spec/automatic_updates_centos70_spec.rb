@@ -10,7 +10,7 @@ describe 'automatic_updates_test::* on Centos 7.0' do
     platform: 'centos',
     version: '7.0',
     step_into: ['automatic_updates']
-  }
+  }.freeze
 
   context 'Enable automationc_update' do
     let(:chef_run) do
@@ -24,7 +24,7 @@ describe 'automatic_updates_test::* on Centos 7.0' do
     end
 
     it 'installs yum-cron' do
-      expect(chef_run).to install_package('yum-cron')
+      expect(chef_run).to upgrade_package('yum-cron')
     end
 
     it 'enables automatic updates in yum-cron' do
