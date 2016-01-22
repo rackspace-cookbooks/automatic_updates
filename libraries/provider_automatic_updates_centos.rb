@@ -6,9 +6,20 @@ class Chef
     # Provider definition for automatic_updates
     class AutomaticUpdatesCentOS < Chef::Provider::LWRPBase
       def action_enable
+        # check centos version (https://bugzilla.redhat.com/show_bug.cgi?id=1293713)
         converge_by('install yum-cron and configure service') do
           package 'yum-cron' do
             action :install
+            only_if { node['platform_version'].to_i < 7 }
+          end
+          %w(
+            yum
+            yum-cron
+          ).each do |pkg|
+            package pkg do
+              action :upgrade
+              only_if { node['platform_version'].to_i >= 7 }
+            end
           end
 
           # template any relevant files (gets around checking for versions)
