@@ -28,7 +28,7 @@ class Chef
               owner 'root'
               group 'root'
               mode '0644'
-              cookbook 'automatic_updates'
+              cookbook node['template_cookbook']
               variables(
                 automatic_updates_enabled: 'yes',
                 download_only: 'no'
@@ -53,7 +53,7 @@ class Chef
               owner 'root'
               group 'root'
               mode '0644'
-              cookbook 'automatic_updates'
+              cookbook node['template_cookbook']
               variables(
                 automatic_updates_enabled: 'no',
                 download_only: 'yes'
