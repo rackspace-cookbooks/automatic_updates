@@ -26,6 +26,7 @@ module AutomaticUpdates
         end
         execute 'enable_auto_updates' do
           command 'echo unattended-upgrades unattended-upgrades/enable_auto_updates boolean true | debconf-set-selections'
+          only_if 'debconf-get-selections | grep unattended-upgrades | grep boolean | grep false'
           notifies :run, 'execute[dpkg-reconfigure-unattended-upgrades]', :immediately
         end
         execute 'dpkg-reconfigure-unattended-upgrades' do
