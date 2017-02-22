@@ -1,23 +1,25 @@
-require_relative 'spec_helper'
+require 'spec_helper'
 
-describe 'automatic_updates_test::* on Centos 7.0' do
+describe 'automatic_updates_test::* on Centos 6.8' do
   before do
     stub_resources
   end
 
-  CENTOS70_OPTS = {
+  CENTOS68_OPTS = {
     log_level: LOG_LEVEL,
     platform: 'centos',
-    version: '7.0',
-    step_into: ['automatic_updates']
+    version: '6.8',
+    step_into: ['automatic_updates'],
   }.freeze
 
   context 'Enable automationc_update' do
     let(:chef_run) do
-      ChefSpec::SoloRunner.new(CENTOS70_OPTS) do |node|
+      ChefSpec::SoloRunner.new(CENTOS68_OPTS) do |node|
         node_resources(node)
       end.converge('automatic_updates_test::enable')
     end
+
+    it_behaves_like 'installs package yum on CentOS'
 
     it 'calls automatic_updates with the enable action' do
       expect(chef_run).to enable_automatic_updates('default')
@@ -42,7 +44,7 @@ describe 'automatic_updates_test::* on Centos 7.0' do
 
   context 'Disable automationc_update' do
     let(:chef_run) do
-      ChefSpec::SoloRunner.new(CENTOS70_OPTS) do |node|
+      ChefSpec::SoloRunner.new(CENTOS68_OPTS) do |node|
         node_resources(node)
       end.converge('automatic_updates_test::disable')
     end
