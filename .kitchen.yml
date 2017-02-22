@@ -13,51 +13,54 @@ driver_config:
 
 provisioner:
   name: chef_zero
-  client_rb:
-    environment: _default
-  attributes:
-    openssh:
-      server:
-        password_authentication: 'yes'
-        permit_root_login: 'yes'
-    cloud:
-      public_ipv4: '127.0.0.1'
-    authorization:
-      sudo:
-        users: ['vagrant']
-        passwordless: true
-    platformstack:
-      cloud_backup:
-        enabled: false
-      cloud_monitoring:
-        enabled: false
-      omnibus_updater:
-        enabled: false
-      iptables:
-        allow_ssh_from_world: true
-    rackspace:
-      cloud_credentials:
-        username: 'racker'
-        api_key: 'sekrit'
+
+verifier:
+  name: inspec
 
 platforms:
+  - name: ubuntu-16.04
+    run_list:
+    - recipe[apt]
   - name: ubuntu-14.04
     run_list:
     - recipe[apt]
   - name: ubuntu-12.04
     run_list:
     - recipe[apt]
-  - name: centos-6
+  - name: centos-7.3
     run_list:
     - recipe[yum]
-<% if ENV['CI'] %>
-  - name: centos-7
-<% else %>
-  - name: centos-7.0
-<% end %>
+  - name: centos-6.8
     run_list:
     - recipe[yum]
 
 suites:
   - name: default
     run_list: recipe[automatic_updates]
+
+  - name: rackspace
+    run_list: recipe[automatic_updates]
+    attributes:
+      openssh:
+        server:
+          password_authentication: 'yes'
+          permit_root_login: 'yes'
+      cloud:
+        public_ipv4: '127.0.0.1'
+      authorization:
+        sudo:
+          users: ['vagrant']
+          passwordless: true
+      platformstack:
+        cloud_backup:
+          enabled: false
+        cloud_monitoring:
+          enabled: false
+        omnibus_updater:
+          enabled: false
+        iptables:
+          allow_ssh_from_world: true
+      rackspace:
+        cloud_credentials:
+          username: 'racker'
+          api_key: 'sekrit'
