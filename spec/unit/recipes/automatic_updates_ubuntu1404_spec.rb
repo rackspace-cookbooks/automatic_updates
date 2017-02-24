@@ -1,4 +1,4 @@
-require_relative 'spec_helper'
+require 'spec_helper'
 
 describe 'automatic_updates_test::* on Ubuntu 14.04' do
   before do
@@ -9,7 +9,7 @@ describe 'automatic_updates_test::* on Ubuntu 14.04' do
     log_level: LOG_LEVEL,
     platform: 'ubuntu',
     version: '14.04',
-    step_into: ['automatic_updates']
+    step_into: ['automatic_updates'],
   }.freeze
 
   context 'Enable automationc_update' do

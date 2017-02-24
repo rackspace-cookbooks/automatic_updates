@@ -2,7 +2,11 @@ require 'chefspec'
 require 'chefspec/berkshelf'
 require_relative 'automatic_updates_shared'
 
-::LOG_LEVEL = ENV['CHEFSPEC_LOG_LEVEL'] ? ENV['CHEFSPEC_LOG_LEVEL'].to_sym : :fatal
+RSpec.configure do |config|
+  ::LOG_LEVEL = ENV['CHEFSPEC_LOG_LEVEL'] ? ENV['CHEFSPEC_LOG_LEVEL'].to_sym : :fatal
+  config.formatter = :documentation
+  config.color = true
+end
 
 def stub_resources
   allow(File).to receive(:exist?).and_call_original
@@ -13,7 +17,6 @@ def stub_resources
   stub_command('debconf-get-selections | grep unattended-upgrades | grep boolean | grep true').and_return(0)
 end
 
-def node_resources(_node)
-end
+def node_resources(_node) end
 
 at_exit { ChefSpec::Coverage.report! }
