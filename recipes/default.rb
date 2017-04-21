@@ -7,4 +7,5 @@
 #
 automatic_updates 'default' do
   action :enable
+  send_email 'no'
 end
