@@ -23,7 +23,8 @@ module AutomaticUpdates
             cookbook 'automatic_updates'
             variables(
               automatic_updates_enabled: 'yes',
-              download_only: 'no'
+              download_only: 'no',
+              automatic_updates_send_email: send_email
             )
             notifies :restart, 'service[yum-cron]', :delayed
           end
