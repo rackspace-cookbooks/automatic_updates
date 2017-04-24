@@ -1,6 +1,7 @@
 resource_name :automatic_updates
 
 property :name, name_property: true
+property :send_email, String, default: 'yes'
 
 default_action :enable
 
