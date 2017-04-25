@@ -4,6 +4,7 @@ group :lint do
   gem 'foodcritic', '~> 3.0'
   gem 'foodcritic-rackspace-rules'
   gem 'rubocop', '~> 0.24'
+  gem 'cookstyle'
 end
 
 group :unit do
