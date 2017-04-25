@@ -12,7 +12,7 @@ describe 'automatic_updates_test::* on Centos 6.8' do
     step_into: ['automatic_updates'],
   }.freeze
 
-  context 'Enable automationc_update' do
+  context 'Enable automatic_update' do
     let(:chef_run) do
       ChefSpec::SoloRunner.new(CENTOS68_OPTS) do |node|
         node_resources(node)
@@ -42,7 +42,19 @@ describe 'automatic_updates_test::* on Centos 6.8' do
     end
   end
 
-  context 'Disable automationc_update' do
+  context 'Enable automatic_update without email' do
+    let(:chef_run) do
+      ChefSpec::SoloRunner.new(CENTOS68_OPTS) do |node|
+        node_resources(node)
+      end.converge('automatic_updates_test::enable_noemail')
+    end
+
+    it 'enables automatic updates in yum-cron.conf' do
+      expect(chef_run).to render_file('/etc/yum/yum-cron.conf').with_content('update_messages = no')
+    end
+  end
+
+  context 'Disable automatic_update' do
     let(:chef_run) do
       ChefSpec::SoloRunner.new(CENTOS68_OPTS) do |node|
         node_resources(node)

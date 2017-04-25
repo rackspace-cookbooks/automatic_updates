@@ -12,7 +12,7 @@ describe 'automatic_updates_test::* on Ubuntu 16.04' do
     step_into: ['automatic_updates'],
   }.freeze
 
-  context 'Enable automationc_update' do
+  context 'Enable automatic_update' do
     let(:chef_run) do
       ChefSpec::SoloRunner.new(UBUNTU1604_OPTS) do |node|
         node_resources(node)
@@ -22,7 +22,7 @@ describe 'automatic_updates_test::* on Ubuntu 16.04' do
     it_behaves_like 'enable automatic updates for Ubuntu'
   end
 
-  context 'Disable automationc_update' do
+  context 'Disable automatic_update' do
     let(:chef_run) do
       ChefSpec::SoloRunner.new(UBUNTU1604_OPTS) do |node|
         node_resources(node)

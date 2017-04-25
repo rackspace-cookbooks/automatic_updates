@@ -13,7 +13,6 @@ if os[:family] == 'redhat'
   describe file('/etc/yum/yum-cron.conf') do
     its(:content) { should match(/download_updates = yes/) }
     its(:content) { should match(/apply_updates = yes/) }
-    its(:content) { should match(/update_messages = no/) }
   end
 
   describe service('yum-cron') do
