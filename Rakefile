@@ -1,5 +1,6 @@
 require 'bundler/setup'
 require 'rspec/core/rake_task'
+require 'cookstyle'
 require 'rubocop/rake_task'
 require 'foodcritic'
 require 'kitchen'
@@ -23,7 +24,7 @@ task style: ['style:chef', 'style:ruby']
 # Rspec and ChefSpec
 desc 'Run ChefSpec unit tests'
 RSpec::Core::RakeTask.new(:spec) do |t, args|
-  t.rspec_opts = 'test/unit'
+  t.rspec_opts = 'spec/unit'
 end
 
 # Integration tests. Kitchen.ci
