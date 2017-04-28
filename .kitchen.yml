@@ -27,10 +27,10 @@ platforms:
   - name: ubuntu-12.04
     run_list:
     - recipe[apt]
-  - name: centos-7.3
+  - name: centos-7
     run_list:
     - recipe[yum]
-  - name: centos-6.8
+  - name: centos-6
     run_list:
     - recipe[yum]
 

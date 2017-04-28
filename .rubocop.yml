@@ -1,5 +1,9 @@
 # Rubocop,  we're buddies and all,  but we're going to have to disagree on the following -
 
+# This trailing comma rule goes back and forth every few months
+Style/TrailingCommaInLiteral:
+  Enabled: false
+
 # Disable requirement of "encoding" headers on files
 Encoding:
   Enabled: false
@@ -40,6 +44,9 @@ WordArray:
 # Don't complain about unused block args
 UnusedBlockArgument:
   Enabled: false
+
+Metrics/BlockLength:
+  Max: 75  
 
 Style/ClassAndModuleChildren:
   Enabled: false
